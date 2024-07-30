@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import basicSlice from "./slices/basicSlice";
+import userSlice from "./slices/userSlice";
 
 const store = configureStore({
   reducer: combineReducers({
-    basic: basicSlice,
+    user: userSlice,
   }),
 });
 

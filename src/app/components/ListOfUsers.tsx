@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsers } from "../hooks/useGetUsers";
 import { PreviewUser, UserTableSkeleton } from "./index";
 import { User } from "../interfaces/user";
+
 export const ListOfUsers = () => {
   const usersQuery = useGetUsers();
   const navigate = useNavigate();
@@ -15,8 +16,8 @@ export const ListOfUsers = () => {
         Add User
       </button>
       {usersQuery.isLoading && <UserTableSkeleton />}
-      {usersQuery.data?.map((user: User) => (
-        <PreviewUser key={`${user.first_name}-${user.last_name}`} user={user} />
+      {usersQuery.data?.map((user: User, index) => (
+        <PreviewUser key={`${user.first_name}-${index}`} user={user} />
       ))}
     </div>
   );

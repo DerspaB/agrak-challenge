@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { useDeleteUser } from "../hooks/useDeleteUser";
 import { User } from "../interfaces";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/slices/userSlice";
 
 interface PreviewUserProps {
   user: User;
@@ -7,10 +10,18 @@ interface PreviewUserProps {
 
 export const PreviewUser = ({ user }: PreviewUserProps) => {
   const userMutation = useDeleteUser();
+  const dispatch = useAppDispatch();
 
   const handleDeleteUser = () => {
     userMutation.mutate(user.id);
   };
+
+  const handleSetCurrentUser = () => {
+    dispatch(setUser(user));
+    navigate("/update");
+  };
+
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-[60px_1fr] sm:grid-cols-[60px_repeat(4,_1fr)] items-center gap-4 p-2 w-full relative">
       <section className="w-[60px] h-[60px] rounded-full">
@@ -25,7 +36,10 @@ export const PreviewUser = ({ user }: PreviewUserProps) => {
       <h3 className="hidden sm:block font-semibold">{user.second_name}</h3>
       <h3 className="hidden sm:block font-semibold">{user.email}</h3>
       <div className="flex justify-center items-center gap-3">
-        <button className="bg-blue-400 text-white px-2 py-1 font-medium rounded-md">
+        <button
+          onClick={handleSetCurrentUser}
+          className="bg-blue-400 text-white px-2 py-1 font-medium rounded-md"
+        >
           Edit
         </button>
         <button

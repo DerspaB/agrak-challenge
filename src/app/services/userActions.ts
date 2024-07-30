@@ -31,9 +31,9 @@ export const userActions = {
             throw new Error(error as string)
         }
     },
-    updateUser: async (user: UserCreation) => {
+    updateUser: async (user: User) => {
         try {
-            const { data } = await userApi.put('', user)
+            const { data } = await userApi.put(`/${user.id}`, user)
             return data
         } catch (error) {
             throw new Error(error as string)

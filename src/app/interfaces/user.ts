@@ -1,7 +1,7 @@
 
 
 export interface User {
-    createdAt: Date;
+    createdAt: string;
     first_name: string;
     avatar: string;
     second_name: string;
